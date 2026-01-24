@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quảng Trị Time Capsule | WebAR</title>
+  
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+</head>
+
+<body>
+  <div id="start-screen">
+    <div class="content">
+      <h1>QUẢNG TRỊ<br>TIME CAPSULE</h1>
+      <p>Hướng camera vào ảnh di tích để kích hoạt</p>
+      <button id="start-btn">BẮT ĐẦU TRẢI NGHIỆM</button>
+    </div>
+  </div>
+
+  <a-scene 
+    mindar-image="imageTargetSrc: ./assets/targets.mind; filterMinCF:0.0001; filterBeta: 0.001;" 
+    color-space="sRGB" 
+    renderer="colorManagement: true, physicallyCorrectLights" 
+    vr-mode-ui="enabled: false" 
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <a-asset-item id="soldierModel" src="./assets/soldier.glb"></a-asset-item>
+      <video id="historyVideo" src="./assets/history.mp4" loop="true" crossorigin="anonymous"></video>
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <a-entity id="mytarget" mindar-image-target="targetIndex: 0">
+      
+      <a-gltf-model 
+        src="#soldierModel" 
+        rotation="0 0 0" 
+        position="0 -0.5 0" 
+        scale="0.5 0.5 0.5" 
+        animation="property: position; to: 0 -0.4 0; dur: 2000; easing: easeInOutQuad; loop: true; dir: alternate">
+      </a-gltf-model>
+
+      </a-entity>
+  </a-scene>
+
+  <script src="script.js"></script>
+</body>
+</html>
